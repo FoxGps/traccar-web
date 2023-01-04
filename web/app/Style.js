@@ -70,7 +70,7 @@ Ext.define('Traccar.Style', {
     mapScaleNormal: 1,
     mapScaleSelected: 1.5,
 
-    mapMaxZoom: 18,
+    mapMaxZoom: 19,
     mapDelay: 500,
 
     mapAccuracyColor: 'rgba(96, 96, 96, 1.0)',
@@ -91,5 +91,15 @@ Ext.define('Traccar.Style', {
 
     chartPadding: '20 40 10 10',
     chartMarkerRadius: 3,
-    chartMarkerHighlightScaling: 1.5
+
+    chartMarkerHighlightScaling: 1.5,
+
+    foxThemeColor: {
+        main: '#181818',
+        light: '#ff8614',
+        dark: '#fa7614',
+        darker: '#e06000',
+        lighter: '#fc9f59'
+
+    }
 });
