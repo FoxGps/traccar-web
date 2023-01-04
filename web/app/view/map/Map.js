@@ -89,12 +89,6 @@ Ext.define('Traccar.view.map.Map', {
             stateId: 'device-follow-button',
             toggleHandler: 'onFollowClick'
         }, {
-            xtype: 'button',
-            glyph: 'xf0d0@FontAwesome',
-            handler: function () {
-                location.assign(window.location.href + 'modern');
-            }
-        }, {
             xtype: 'settingsMenu',
             enableToggle: false
         }]
