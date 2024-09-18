@@ -11,7 +11,9 @@ import SplitButton from '../../common/components/SplitButton';
 import SelectField from '../../common/components/SelectField';
 import { useRestriction } from '../../common/util/permissions';
 
-const ReportFilter = ({ children, handleSubmit, handleSchedule, showOnly, ignoreDevice, multiDevice, includeGroups }) => {
+const ReportFilter = ({
+  children, handleSubmit, handleSchedule, showOnly, ignoreDevice, multiDevice, includeGroups, loading,
+}) => {
   const classes = useReportStyles();
   const dispatch = useDispatch();
   const t = useTranslation();
@@ -33,7 +35,7 @@ const ReportFilter = ({ children, handleSubmit, handleSchedule, showOnly, ignore
   const [calendarId, setCalendarId] = useState();
 
   const scheduleDisabled = button === 'schedule' && (!description || !calendarId);
-  const disabled = (!ignoreDevice && !deviceId && !deviceIds.length && !groupIds.length) || scheduleDisabled;
+  const disabled = (!ignoreDevice && !deviceId && !deviceIds.length && !groupIds.length) || scheduleDisabled || loading;
 
   const handleClick = (type) => {
     if (type === 'schedule') {
@@ -71,8 +73,8 @@ const ReportFilter = ({ children, handleSubmit, handleSchedule, showOnly, ignore
           selectedTo = dayjs().subtract(1, 'month').endOf('month');
           break;
         default:
-          selectedFrom = dayjs(from, 'DD-MM-YYYYTHH:mm');
-          selectedTo = dayjs(to, 'DD-MM-YYYYTHH:mm');
+          selectedFrom = dayjs(from, 'YYYY-MM-DDTHH:mm');
+          selectedTo = dayjs(to, 'YYYY-MM-DDTHH:mm');
           break;
       }
 

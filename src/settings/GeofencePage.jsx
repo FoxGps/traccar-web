@@ -12,12 +12,13 @@ import SettingsMenu from './components/SettingsMenu';
 import SelectField from '../common/components/SelectField';
 import { geofencesActions } from '../store';
 import useSettingsStyles from './common/useSettingsStyles';
+import { useAdministrator } from '../common/util/permissions';
 
 const GeofencePage = () => {
   const classes = useSettingsStyles();
   const dispatch = useDispatch();
   const t = useTranslation();
-
+  const admin = useAdministrator();
   const geofenceAttributes = useGeofenceAttributes(t);
 
   const [item, setItem] = useState();
@@ -66,28 +67,32 @@ const GeofencePage = () => {
                 onChange={(event) => setItem({ ...item, description: event.target.value })}
                 label={t('sharedDescription')}
               />
-              <FormControlLabel
-                control={(
-                  <Switch
-                    checked={item.stopIn}
-                    onChange={(event) => setItem({ ...item, stopIn: event.target.checked })}
-                    name="stopIn"
-                    color="warning"
+              {admin && (
+                <>
+                  <FormControlLabel
+                    control={(
+                      <Switch
+                        checked={item.stopIn}
+                        onChange={(event) => setItem({ ...item, stopIn: event.target.checked })}
+                        name="stopIn"
+                        color="warning"
+                      />
+                    )}
+                    label="Bloquear ao Entrar"
                   />
-                )}
-                label="Bloquear ao Entrar"
-              />
-              <FormControlLabel
-                control={(
-                  <Switch
-                    checked={item.stopOut}
-                    onChange={(event) => setItem({ ...item, stopOut: event.target.checked })}
-                    name="stopOut"
-                    color="warning"
+                  <FormControlLabel
+                    control={(
+                      <Switch
+                        checked={item.stopOut}
+                        onChange={(event) => setItem({ ...item, stopOut: event.target.checked })}
+                        name="stopOut"
+                        color="warning"
+                      />
+                    )}
+                    label="Bloquear ao Sair"
                   />
-                )}
-                label="Bloquear ao Sair"
-              />
+                </>
+              )}
               <SelectField
                 value={item.calendarId}
                 onChange={(event) => setItem({ ...item, calendarId: Number(event.target.value) })}

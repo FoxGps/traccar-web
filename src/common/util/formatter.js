@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
 
 import {
   altitudeFromMeters,
@@ -16,6 +17,7 @@ import { prefixString } from './stringUtils';
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
+dayjs.extend(localizedFormat);
 
 export const formatBoolean = (value, t) => (value ? t('sharedYes') : t('sharedNo'));
 
@@ -23,24 +25,27 @@ export const formatNumber = (value, precision = 1) => Number(value.toFixed(preci
 
 export const formatPercentage = (value) => `${value}%`;
 
-export const formatTemperature = (value) => `${value}°C`;
+export const formatTemperature = (value) => `${value.toFixed(1)}°C`;
 
-export const formatVoltage = (value, t) => `${value} ${t('sharedVoltAbbreviation')}`;
+export const formatVoltage = (value, t) => `${value.toFixed(2)} ${t('sharedVoltAbbreviation')}`;
 
-export const formatConsumption = (value, t) => `${value} ${t('sharedLiterPerHourAbbreviation')}`;
+export const formatConsumption = (value, t) => `${value.toFixed(2)} ${t('sharedLiterPerHourAbbreviation')}`;
 
-export const formatTime = (value, format, hours12) => {
+export const formatTime = (value, format) => {
   if (value) {
-    const d = dayjs(value);
+    const d = dayjs(value).toDate();
+    const dateConfig = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const minuteConfig = { hour: '2-digit', minute: '2-digit' };
+    const secondConfig = { ...minuteConfig, second: '2-digit' };
     switch (format) {
       case 'date':
-        return d.format('DD-MM-YYYY');
+        return d.toLocaleDateString(undefined, dateConfig);
       case 'time':
-        return d.format(hours12 ? 'hh:mm:ss A' : 'HH:mm:ss');
+        return d.toLocaleTimeString(undefined, secondConfig);
       case 'minutes':
-        return d.format(hours12 ? 'DD-MM-YYYY hh:mm A' : 'DD-MM-YYYY HH:mm');
+        return d.toLocaleString(undefined, { ...dateConfig, ...minuteConfig });
       default:
-        return d.format(hours12 ? 'DD-MM-YYYY hh:mm:ss A' : 'DD-MM-YYYY HH:mm:ss');
+        return d.toLocaleString(undefined, { ...dateConfig, ...secondConfig });
     }
   }
   return '';

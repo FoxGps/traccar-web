@@ -139,18 +139,18 @@ const CalendarPage = () => {
                   <TextField
                     label={t('reportFrom')}
                     type="datetime-local"
-                    value={dayjs(lines[5].slice(-15)).locale('en').format('DD-MM-YYYYTHH:mm')}
+                    value={dayjs(lines[5].slice(-15)).locale('en').format('YYYY-MM-DDTHH:mm')}
                     onChange={(e) => {
-                      const time = formatCalendarTime(dayjs(e.target.value, 'DD-MM-YYYYTHH:mm'));
+                      const time = formatCalendarTime(dayjs(e.target.value, 'YYYY-MM-DDTHH:mm'));
                       setItem({ ...item, data: updateCalendar(lines, 5, `DTSTART;${time}`) });
                     }}
                   />
                   <TextField
                     label={t('reportTo')}
                     type="datetime-local"
-                    value={dayjs(lines[6].slice(-15)).locale('en').format('DD-MM-YYYYTHH:mm')}
+                    value={dayjs(lines[6].slice(-15)).locale('en').format('YYYY-MM-DDTHH:mm')}
                     onChange={(e) => {
-                      const time = formatCalendarTime(dayjs(e.target.value, 'DD-MM-YYYYTHH:mm'));
+                      const time = formatCalendarTime(dayjs(e.target.value, 'YYYY-MM-DDTHH:mm'));
                       setItem({ ...item, data: updateCalendar(lines, 6, `DTEND;${time}`) });
                     }}
                   />
@@ -178,7 +178,7 @@ const CalendarPage = () => {
                         {rule.frequency === 'WEEKLY' ? ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map((it) => (
                           <MenuItem key={it} value={it.substring(0, 2).toUpperCase()}>{t(prefixString('calendar', it))}</MenuItem>
                         )) : Array.from({ length: 31 }, (_, i) => i + 1).map((it) => (
-                          <MenuItem key={it} value={it}>{it}</MenuItem>
+                          <MenuItem key={it} value={String(it)}>{it}</MenuItem>
                         ))}
                       </Select>
                     </FormControl>

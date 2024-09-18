@@ -13,7 +13,7 @@ import PageLayout from '../common/components/PageLayout';
 import ReportsMenu from './components/ReportsMenu';
 import usePositionAttributes from '../common/attributes/usePositionAttributes';
 import { useCatch } from '../reactHelper';
-import { useAttributePreference, usePreference } from '../common/util/preferences';
+import { useAttributePreference } from '../common/util/preferences';
 import {
   altitudeFromMeters, distanceFromMeters, speedFromKnots, volumeFromLiters,
 } from '../common/util/converter';
@@ -29,11 +29,11 @@ const ChartReportPage = () => {
   const altitudeUnit = useAttributePreference('altitudeUnit');
   const speedUnit = useAttributePreference('speedUnit');
   const volumeUnit = useAttributePreference('volumeUnit');
-  const hours12 = usePreference('twelveHourFormat');
 
   const [items, setItems] = useState([]);
   const [types, setTypes] = useState(['speed']);
   const [type, setType] = useState('speed');
+  const [timeType, setTimeType] = useState('fixTime');
 
   const values = items.map((it) => it[type]);
   const minValue = Math.min(...values);
@@ -53,6 +53,8 @@ const ChartReportPage = () => {
         const data = { ...position, ...position.attributes };
         const formatted = {};
         formatted.fixTime = dayjs(position.fixTime).valueOf();
+        formatted.deviceTime = dayjs(position.deviceTime).valueOf();
+        formatted.serverTime = dayjs(position.serverTime).valueOf();
         Object.keys(data).filter((key) => !['id', 'deviceId'].includes(key)).forEach((key) => {
           const value = data[key];
           if (typeof value === 'number') {
@@ -113,6 +115,21 @@ const ChartReportPage = () => {
             </Select>
           </FormControl>
         </div>
+        <div className={classes.filterItem}>
+          <FormControl fullWidth>
+            <InputLabel>{t('reportTimeType')}</InputLabel>
+            <Select
+              label={t('reportTimeType')}
+              value={timeType}
+              onChange={(e) => setTimeType(e.target.value)}
+              disabled={!items.length}
+            >
+              <MenuItem value="fixTime">{t('positionFixTime')}</MenuItem>
+              <MenuItem value="deviceTime">{t('positionDeviceTime')}</MenuItem>
+              <MenuItem value="serverTime">{t('positionServerTime')}</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
       </ReportFilter>
       {items.length > 0 && (
         <div className={classes.chart}>
@@ -124,9 +141,9 @@ const ChartReportPage = () => {
               }}
             >
               <XAxis
-                dataKey="fixTime"
+                dataKey={timeType}
                 type="number"
-                tickFormatter={(value) => formatTime(value, 'time', hours12)}
+                tickFormatter={(value) => formatTime(value, 'time')}
                 domain={['dataMin', 'dataMax']}
                 scale="time"
               />
@@ -138,7 +155,7 @@ const ChartReportPage = () => {
               <CartesianGrid strokeDasharray="3 3" />
               <Tooltip
                 formatter={(value, key) => [value, positionAttributes[key]?.name || key]}
-                labelFormatter={(value) => formatTime(value, 'seconds', hours12)}
+                labelFormatter={(value) => formatTime(value, 'seconds')}
               />
               <Line type="monotone" dataKey={type} />
             </LineChart>
