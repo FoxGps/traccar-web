@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Draggable from 'react-draggable';
@@ -118,6 +118,7 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const t = useTranslation();
+  const cardRef = useRef(null);
 
   const deviceReadonly = useDeviceReadonly();
   const PartialDisableEditDevice = useAttributePreference('ui.PartialDisableEditDevice') || false; // gui config permissão de usuário par exibir
@@ -179,8 +180,11 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
         {device && (
           <Draggable
             handle={`.${classes.media}, .${classes.header}`}
+            nodeRef={cardRef} // Use nodeRef prop to pass the ref
           >
-            <Card elevation={3} className={classes.card}>
+            <Card elevation={3} className={classes.card} ref={cardRef}>
+              {' '}
+              {/* Apply the ref here */}
               {deviceImage ? (
                 <CardMedia
                   className={classes.media}
