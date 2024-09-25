@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import {
-  useMediaQuery, Select, MenuItem, FormControl, Button, TextField, Link, Snackbar, IconButton, LinearProgress, Box, FormGroup, FormControlLabel, Checkbox, Tooltip,
+  useMediaQuery, Select, MenuItem, FormControl, Button, TextField, Link, Snackbar, IconButton, LinearProgress, Box, FormGroup, FormControlLabel, Checkbox, Tooltip, Box,
 } from '@mui/material';
 import ReactCountryFlag from 'react-country-flag';
 import makeStyles from '@mui/styles/makeStyles';
@@ -18,6 +18,7 @@ import usePersistedState from '../common/util/usePersistedState';
 import { handleLoginTokenListeners, nativeEnvironment, nativePostMessage } from '../common/components/NativeInterface';
 import LogoImage from './LogoImage';
 import { useCatch } from '../reactHelper';
+import Loader from '../common/components/Loader';
 
 const useStyles = makeStyles((theme) => ({
   options: {
@@ -192,7 +193,7 @@ const LoginPage = () => {
 
   if (openIdForced) {
     handleOpenIdLogin();
-    return (<LinearProgress />);
+    return (<Loader />);
   }
 
   return (
