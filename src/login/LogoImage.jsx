@@ -30,10 +30,10 @@ const LogoImage = ({ color }) => {
       return <img className={classes.image} src={logoInverted} alt="" />;
     }
     return <img className={classes.image} src={logo} alt="" />;
-  } if (color === '#fff') {
-    return <Logo className={classes.image} style={{ color }} />;
+  } if (theme.palette.mode === 'dark') {
+    return <LogoDark className={classes.image} style={{ color }} />;
   }
-  return <LogoDark className={classes.image} style={{ color }} />;
+  return <Logo className={classes.image} style={{ color }} />;
 };
 
 export default LogoImage;
