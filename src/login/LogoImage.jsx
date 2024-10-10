@@ -3,6 +3,7 @@ import { useTheme, useMediaQuery } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import Logo from '../resources/images/logo.svg?react';
+import LogoDark from '../resources/images/logo-dark.svg?react';
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
 }));
-
+// Update by: Gui
 const LogoImage = ({ color }) => {
   const theme = useTheme();
   const classes = useStyles();
@@ -29,8 +30,10 @@ const LogoImage = ({ color }) => {
       return <img className={classes.image} src={logoInverted} alt="" />;
     }
     return <img className={classes.image} src={logo} alt="" />;
+  } if (color === '#fff') {
+    return <Logo className={classes.image} style={{ color }} />;
   }
-  return <Logo className={classes.image} style={{ color }} />;
+  return <LogoDark className={classes.image} style={{ color }} />;
 };
 
 export default LogoImage;
