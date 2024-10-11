@@ -36,11 +36,11 @@ export const prepareIcon = (background, icon, color) => {
   canvas.style.height = `${background.height}px`;
 
   const context = canvas.getContext('2d');
-  if (color && color === '#388e3c') { // logica de cor pra ignição ligada by gui
-    // Desenhar o fundo com o efeito de sombra
+
+  if (color && color === '#388e3c') {
     context.save();
-    context.shadowBlur = 5; // Ajuste o valor do sombreamento conforme necessário
-    context.shadowColor = 'rgba(0, 255, 0, 1)'; // Cor verde claro com transparência
+    context.shadowBlur = 7;
+    context.shadowColor = 'rgba(0, 255, 0, 1)';
     context.shadowOffsetX = 0;
     context.shadowOffsetY = 0;
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -53,10 +53,13 @@ export const prepareIcon = (background, icon, color) => {
     const iconRatio = 0.5;
     const imageWidth = canvas.width * iconRatio;
     const imageHeight = canvas.height * iconRatio;
-    context.drawImage(canvasTintImage(icon, color), (canvas.width - imageWidth) / 2, (canvas.height - imageHeight) / 2, imageWidth, imageHeight);
+    const tintedIcon = canvasTintImage(icon, color);
+    context.drawImage(tintedIcon, (canvas.width - imageWidth) / 2, (canvas.height - imageHeight) / 2, imageWidth, imageHeight);
   }
 
-  return context.getImageData(0, 0, canvas.width, canvas.height);
+  const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+  return imageData;
 };
 
 export const reverseCoordinates = (it) => {

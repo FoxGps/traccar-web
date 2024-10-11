@@ -37,13 +37,26 @@ const MapPositions = ({ positions, onClick, showStatus, selectedPosition, titleF
         showDirection = selectedPositionId === position.id && position.course > 0;
         break;
     }
+    let color;
+    if (showStatus) {
+      if (position.attributes.color) {
+        color = position.attributes.color;
+      } else if (device.status === 'online' && position.attributes.ignition) {
+        color = 'ignition';
+      } else {
+        color = getStatusColor(device.status);
+      }
+    } else {
+      color = 'neutral';
+    }
+
     return {
       id: position.id,
       deviceId: position.deviceId,
       name: device.name,
       fixTime: formatTime(position.fixTime, 'seconds'),
       category: mapIconKey(device.category),
-      color: showStatus ? position.attributes.color || getStatusColor(device.status) : 'neutral',
+      color,
       rotation: position.course,
       direction: showDirection,
     };

@@ -8,8 +8,8 @@ export default defineConfig(() => ({
   server: {
     port: 3000,
     proxy: {
-      '/api/socket': 'ws://localhost:8082',
-      '/api': 'http://localhost:8082',
+      '/api/socket': 'ws://app.foxgps.com.br:8082',
+      '/api': 'http://app.foxgps.com.br:8082/',
     },
   },
   build: {
@@ -22,7 +22,7 @@ export default defineConfig(() => ({
       includeAssets: ['favicon.ico', 'apple-touch-icon-180x180.png'],
       workbox: {
         navigateFallbackDenylist: [/^\/api/],
-        maximumFileSizeToCacheInBytes: 4000000,
+        maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
         globPatterns: ['**/*.{js,css,html,woff,woff2,mp3}'],
       },
       manifest: {
