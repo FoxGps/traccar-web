@@ -263,7 +263,7 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
                 </IconButton>
                 {/* foxgps ... */}
                 <IconButton
-                  color="geometry"
+                  color="status"
                   onClick={() => navigate(`/settings/device/${deviceId}/connections`)}
                   disabled={disableActions}
                 >

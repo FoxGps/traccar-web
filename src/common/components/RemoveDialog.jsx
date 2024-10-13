@@ -43,7 +43,8 @@ const RemoveDialog = ({
       onClose={() => onResult(false)}
       message={t('sharedRemoveConfirm')}
       action={(
-        <Button size="small" className={classes.button} onClick={handleRemove}>
+        // foxgps color="error"
+        <Button size="small" color="error" className={classes.button} onClick={handleRemove}>
           {t('sharedRemove')}
         </Button>
       )}
