@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'; // foxgps
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Draggable from 'react-draggable';
-import LockIcon from '@mui/icons-material/Lock'; // foxgps
+import { LockOpen, Lock } from '@mui/icons-material'; // foxgps
 import {
   Card,
   CardContent,
@@ -26,6 +26,7 @@ import LinkIcon from '@mui/icons-material/Link'; // foxgps
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PendingIcon from '@mui/icons-material/Pending';
+import LockUnlockDialog from './LockUnlockDialog'; // foxgps
 
 import { useTranslation } from './LocalizationProvider';
 import RemoveDialog from './RemoveDialog';
@@ -137,6 +138,10 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [removing, setRemoving] = useState(false);
+
+  // foxgps
+  const [openLockUnlockDialog, setOpenLockUnlockDialog] = useState(false);
+  const [lockUnlockAction, setLockUnlockAction] = useState('');
 
   const handleRemove = useCatch(async (removed) => {
     if (removed) {
@@ -252,7 +257,7 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
                 <IconButton
                   color="warning"
                   onClick={() => navigate(`/settings/device/${deviceId}/command`)}
-                  disabled={disableActions || deviceReadonly}
+                  disabled={disableActions}
                 >
                   <PublishIcon />
                 </IconButton>
@@ -264,10 +269,33 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
                 >
                   <LinkIcon />
                 </IconButton>
-                {position?.attributes?.out1 && (
+                {!position?.attributes?.out1 && (
                 <Tooltip title={`${t('eventLock')}`}>
-                  <IconButton size="small" color="error">
-                    <LockIcon fontSize="small" />
+                  <IconButton
+                    size="small"
+                    color="error"
+                    disabled={disableActions || deviceReadonly}
+                    onClick={() => {
+                      setLockUnlockAction('lock');
+                      setOpenLockUnlockDialog(true);
+                    }}
+                  >
+                    <Lock fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+                )}
+                {position?.attributes?.out1 && (
+                <Tooltip title={`${t('alarmUnlock')}`}>
+                  <IconButton
+                    size="small"
+                    color="success"
+                    disabled={disableActions || deviceReadonly}
+                    onClick={() => {
+                      setLockUnlockAction('unlock');
+                      setOpenLockUnlockDialog(true);
+                    }}
+                  >
+                    <LockOpen fontSize="small" />
                   </IconButton>
                 </Tooltip>
                 )}
@@ -305,6 +333,13 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
         endpoint="devices"
         itemId={deviceId}
         onResult={(removed) => handleRemove(removed)}
+      />
+      {/* foxgps */}
+      <LockUnlockDialog
+        open={openLockUnlockDialog}
+        onClose={() => setOpenLockUnlockDialog(false)}
+        deviceId={deviceId}
+        action={lockUnlockAction}
       />
     </>
   );

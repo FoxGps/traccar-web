@@ -609,5 +609,15 @@
     "categoryVan": "वैन",
     "categoryScooter": "Scooter",
     "maintenanceStart": "प्रारंभ",
-    "maintenancePeriod": "अवधि"
+    "maintenancePeriod": "अवधि",
+    "lockVehicle": "Lock Vehicle",
+    "unlockVehicle": "Unlock Vehicle",
+    "confirmLockVehicle": "Do you really want to lock the vehicle?",
+    "confirmUnlockVehicle": "Do you really want to unlock the vehicle?",
+    "yes": "Yes",
+    "no": "No",
+    "lockVehicleCommand": "Vehicle lock command",
+    "unlockVehicleCommand": "Unlock Vehicle Command",
+    "commandSentSuccessfully": "Command sent successfully",
+    "commandFailed": "Failed to send command"
 }
