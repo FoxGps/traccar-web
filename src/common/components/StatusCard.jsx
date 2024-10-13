@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'; // foxgps
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Draggable from 'react-draggable';
+import LockIcon from '@mui/icons-material/Lock'; // foxgps
 import {
   Card,
   CardContent,
@@ -15,6 +16,7 @@ import {
   Menu,
   MenuItem,
   CardMedia,
+  Tooltip,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import CloseIcon from '@mui/icons-material/Close';
@@ -241,24 +243,34 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
                   <PendingIcon />
                 </IconButton>
                 <IconButton
+                  color="info"
                   onClick={() => navigate('/replay')}
                   disabled={disableActions || !position}
                 >
                   <ReplayIcon />
                 </IconButton>
                 <IconButton
+                  color="warning"
                   onClick={() => navigate(`/settings/device/${deviceId}/command`)}
-                  disabled={disableActions}
+                  disabled={disableActions || deviceReadonly}
                 >
                   <PublishIcon />
                 </IconButton>
                 {/* foxgps ... */}
                 <IconButton
+                  color="geometry"
                   onClick={() => navigate(`/settings/device/${deviceId}/connections`)}
                   disabled={disableActions}
                 >
                   <LinkIcon />
                 </IconButton>
+                {position?.attributes?.out1 && (
+                <Tooltip title={`${t('eventLock')}`}>
+                  <IconButton size="small" color="error">
+                    <LockIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+                )}
                 {/* ... foxgps */}
                 <IconButton
                   onClick={() => navigate(`/settings/device/${deviceId}`)}
