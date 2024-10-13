@@ -10,6 +10,7 @@ import { CssBaseline, StyledEngineProvider } from '@mui/material';
 import store from './store';
 import { LocalizationProvider } from './common/components/LocalizationProvider';
 import ErrorHandler from './common/components/ErrorHandler';
+import SuccessHandler from './common/components/SuccessHandler'; // foxgps
 import Navigation from './Navigation';
 import preloadImages from './map/core/preloadImages';
 import NativeInterface from './common/components/NativeInterface';
@@ -32,6 +33,9 @@ root.render(
                 <Navigation />
               </BrowserRouter>
               <ErrorHandler />
+              {/* foxgps */}
+              <SuccessHandler />
+              {/* foxgps */}
               <NativeInterface />
             </ServerProvider>
           </AppThemeProvider>

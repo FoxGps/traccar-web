@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { errorsReducer as errors } from './errors';
+import { successReducer as success } from './success'; // foxgps
 import { sessionReducer as session } from './session';
 import { devicesReducer as devices } from './devices';
 import { eventsReducer as events } from './events';
@@ -14,6 +15,7 @@ import throttleMiddleware from './throttleMiddleware';
 
 const reducer = combineReducers({
   errors,
+  success, // foxgps
   session,
   devices,
   events,
