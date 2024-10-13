@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import {
-  useMediaQuery, Select, MenuItem, FormControl, Button, TextField, Link, Snackbar, IconButton, FormGroup, FormControlLabel, Checkbox, Tooltip, Box,
+  useMediaQuery, Select, MenuItem, FormControl, Button, TextField, Link, Snackbar, IconButton, FormGroup, FormControlLabel, Checkbox, Tooltip, Box, // foxgps
 } from '@mui/material';
 import ReactCountryFlag from 'react-country-flag';
 import makeStyles from '@mui/styles/makeStyles';
@@ -10,7 +10,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useTheme } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import secureLocalStorage from 'react-secure-storage';
+import secureLocalStorage from 'react-secure-storage'; // foxgps
 import { sessionActions } from '../store';
 import { useLocalization, useTranslation } from '../common/components/LocalizationProvider';
 import LoginLayout from './LoginLayout';
@@ -64,9 +64,9 @@ const LoginPage = () => {
   const [email, setEmail] = usePersistedState('loginEmail', '');
   const [password, setPassword] = useState('');
   const [code, setCode] = useState('');
+  // foxgps ...
   const [rememberMe, setRememberMe] = useState(localStorage.getItem('rememberMe') === 'true');
 
-  // lembrar-me inicio
   const [checked, setChecked] = useState(rememberMe || false);
 
   // lembrar-me
@@ -101,8 +101,7 @@ const LoginPage = () => {
   useEffect(() => {
     handleStoreCredentials();
   }, [checked, email, password]);
-
-  // lembrar-me fim
+  // ... foxgps
 
   const registrationEnabled = useSelector((state) => state.session.server.registration);
   const languageEnabled = useSelector((state) => !state.session.server.attributes['ui.disableLoginLanguage']);
@@ -115,7 +114,7 @@ const LoginPage = () => {
   const [announcementShown, setAnnouncementShown] = useState(false);
   const announcement = useSelector((state) => state.session.server.announcement);
 
-  const setMapAttribute = (user) => {
+  const setMapAttribute = (user) => { // foxgps
     user.attributes = { ...user?.attributes, activeMapStyles: 'locationIqStreets,osm,bingHybrid,bingAerial,bingRoad,googleHybrid,googleSatellite,googleRoad' };
   };
 
@@ -149,7 +148,7 @@ const LoginPage = () => {
       });
       if (response.ok) {
         const user = await response.json();
-        setMapAttribute(user); // Criado por Guilherme Crocetti para setar os mapas do google e bing no login
+        setMapAttribute(user); // foxgps
         generateLoginToken();
         dispatch(sessionActions.updateUser(user));
         navigate('/');
@@ -186,10 +185,6 @@ const LoginPage = () => {
     handleLoginTokenListeners.add(listener);
     return () => handleLoginTokenListeners.delete(listener);
   }, []);
-
-  // const redirectToOldWeb = () => {
-  //   window.location.href = 'https://legacy.foxgps.com.br/';
-  // };
 
   if (openIdForced) {
     handleOpenIdLogin();
@@ -274,7 +269,9 @@ const LoginPage = () => {
             {t('loginOpenId')}
           </Button>
         )}
+        {/* foxgps ... */}
         <FormGroup>
+          {' '}
           <FormControlLabel
             control={(
               <Checkbox
@@ -286,6 +283,8 @@ const LoginPage = () => {
             label="lembrar-me"
           />
         </FormGroup>
+        {' '}
+        {/* ... foxgps */}
         <div className={classes.extraContainer}>
           {registrationEnabled && (
             <Link

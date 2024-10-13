@@ -1,14 +1,14 @@
 import React from 'react';
-import { useMediaQuery, Paper, useTheme } from '@mui/material';
+import { useMediaQuery, Paper, useTheme } from '@mui/material'; // foxgps
 import LogoImage from './LogoImage';
-import Image from '../resources/images/cover-1920.jpg';
+import Image from '../resources/images/cover-1920.jpg'; // foxgps
 
 const LoginLayout = ({ children }) => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('lg'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('lg')); // foxgps
 
   return (
-    <main
+    <main // foxgps ...
       style={{
         display: 'flex',
         minHeight: '100vh',
@@ -56,6 +56,8 @@ const LoginLayout = ({ children }) => {
           {!isSmallScreen && (
             <LogoImage color={theme.palette.secondary.contrastText} />
           )}
+          {' '}
+          {/* ... foxgps */}
           {children}
         </form>
       </Paper>

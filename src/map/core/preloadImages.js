@@ -1,4 +1,4 @@
-import { green, grey } from '@mui/material/colors';
+import { green, grey } from '@mui/material/colors'; // foxgps
 import createPalette from '@mui/material/styles/createPalette';
 import { loadImage, prepareIcon } from './mapUtil';
 
@@ -26,7 +26,7 @@ import tramSvg from '../../resources/images/icon/tram.svg';
 import trolleybusSvg from '../../resources/images/icon/trolleybus.svg';
 import truckSvg from '../../resources/images/icon/truck.svg';
 import vanSvg from '../../resources/images/icon/van.svg';
-import bmwSvg from '../../resources/images/icon/bmw.svg';
+import bmwSvg from '../../resources/images/icon/bmw.svg'; // foxgps ...
 import bmwlogo1Svg from '../../resources/images/icon/bmwlogo1.svg';
 import bmwlogo2Svg from '../../resources/images/icon/bmwlogo2.svg';
 import harvestSvg from '../../resources/images/icon/harvest.svg';
@@ -35,7 +35,7 @@ import jetski2Svg from '../../resources/images/icon/jetski2.svg';
 import jetskiSvg from '../../resources/images/icon/jetski.svg';
 import loadertruckSvg from '../../resources/images/icon/loadertruck.svg';
 import motorbikeSvg from '../../resources/images/icon/motorbike.svg';
-import motorcycle2Svg from '../../resources/images/icon/motorcycle2.svg';
+import motorcycle2Svg from '../../resources/images/icon/motorcycle2.svg'; // ... foxgps
 
 export const mapIcons = {
   animal: animalSvg,
@@ -60,7 +60,7 @@ export const mapIcons = {
   trolleybus: trolleybusSvg,
   truck: truckSvg,
   van: vanSvg,
-  bmw: bmwSvg,
+  bmw: bmwSvg, // foxgps ...
   bmwlogo1: bmwlogo1Svg,
   bmwlogo2: bmwlogo2Svg,
   harvest: harvestSvg,
@@ -69,7 +69,7 @@ export const mapIcons = {
   jetski: jetskiSvg,
   loadertruck: loadertruckSvg,
   motorbike: motorbikeSvg,
-  motorcycle2: motorcycle2Svg,
+  motorcycle2: motorcycle2Svg, // ... foxgps
 };
 
 export const mapIconKey = (category) => (mapIcons.hasOwnProperty(category) ? category : 'default');
@@ -78,7 +78,7 @@ export const mapImages = {};
 
 const mapPalette = createPalette({
   neutral: { main: grey[500] },
-  ignition: { main: green[700] },
+  ignition: { main: green[700] }, // foxgps
 });
 
 export default async () => {
@@ -87,7 +87,7 @@ export default async () => {
   mapImages.direction = await prepareIcon(await loadImage(directionSvg));
   await Promise.all(Object.keys(mapIcons).map(async (category) => {
     const results = [];
-    ['info', 'success', 'error', 'neutral', 'ignition'].forEach((color) => {
+    ['info', 'success', 'error', 'neutral', 'ignition'].forEach((color) => { // foxgps
       results.push(loadImage(mapIcons[category]).then((icon) => {
         mapImages[`${category}-${color}`] = prepareIcon(background, icon, mapPalette[color].main);
       }));

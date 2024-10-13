@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  Accordion, AccordionSummary, AccordionDetails, Typography, TextField, Switch, FormControlLabel,
+  Accordion, AccordionSummary, AccordionDetails, Typography, TextField, Switch, FormControlLabel, // foxgps
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditItemView from './components/EditItemView';
@@ -17,6 +17,7 @@ const GeofencePage = () => {
   const classes = useSettingsStyles();
   const dispatch = useDispatch();
   const t = useTranslation();
+
   const geofenceAttributes = useGeofenceAttributes(t);
 
   const [item, setItem] = useState();
@@ -65,6 +66,8 @@ const GeofencePage = () => {
                 onChange={(event) => setItem({ ...item, description: event.target.value })}
                 label={t('sharedDescription')}
               />
+              {/* foxgps ... */}
+              {' '}
               <FormControlLabel
                 control={(
                   <Switch
@@ -87,6 +90,7 @@ const GeofencePage = () => {
                     )}
                 label="Bloquear ao Sair"
               />
+              {/* ... foxgps */}
               <SelectField
                 value={item.calendarId}
                 onChange={(event) => setItem({ ...item, calendarId: Number(event.target.value) })}

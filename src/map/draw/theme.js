@@ -11,8 +11,8 @@ export default [
       ['!=', 'mode', 'static']
     ],
     'paint': {
-      'fill-color': '#f0c25d',
-      'fill-outline-color': '#f0c25d',
+      'fill-color': '#f0c25d', // foxgps
+      'fill-outline-color': '#f0c25d', // foxgps
       'fill-opacity': 0.1
     }
   },
@@ -50,7 +50,7 @@ export default [
       'line-join': 'round'
     },
     'paint': {
-      'line-color': '#f0c25d',
+      'line-color': '#f0c25d', // foxgps
       'line-width': 2
     }
   },
@@ -81,7 +81,7 @@ export default [
       'line-join': 'round'
     },
     'paint': {
-      'line-color': '#f0c25d',
+      'line-color': '#f0c25d', // foxgps
       'line-width': 2
     }
   },
@@ -154,7 +154,7 @@ export default [
     ],
     'paint': {
       'circle-radius': 3,
-      'circle-color': '#f0c25d'
+      'circle-color': '#f0c25d' // foxgps
     }
   },
   {

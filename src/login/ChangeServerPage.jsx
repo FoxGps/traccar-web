@@ -11,9 +11,9 @@ const currentServer = `${window.location.protocol}//${window.location.host}`;
 
 const officialServers = [
   currentServer,
-  'https://app.foxgps.com.br',
-  'http://app.foxgps.com.br:8082',
-  'http://legacy.foxgps.com.br',
+  'https://app.foxgps.com.br', // foxgps
+  'http://app.foxgps.com.br:8082', // foxgps
+  'http://legacy.foxgps.com.br', // foxgps
   'http://localhost:3000',
 ];
 

@@ -20,7 +20,7 @@ import { useAdministrator } from '../common/util/permissions';
 import SettingsMenu from './components/SettingsMenu';
 import useCommonDeviceAttributes from '../common/attributes/useCommonDeviceAttributes';
 import { useCatch } from '../reactHelper';
-import { useAttributePreference } from '../common/util/preferences';
+import { useAttributePreference } from '../common/util/preferences'; // foxgps
 import useQuery from '../common/util/useQuery';
 import useSettingsStyles from './common/useSettingsStyles';
 
@@ -29,7 +29,7 @@ const DevicePage = () => {
   const t = useTranslation();
 
   const admin = useAdministrator();
-  const PartialDisableEditDevice = useAttributePreference('ui.PartialDisableEditDevice') || false; // gui config permissão de usuário par exibir
+  const PartialDisableEditDevice = useAttributePreference('ui.PartialDisableEditDevice') || false; // foxgps
 
   const commonDeviceAttributes = useCommonDeviceAttributes(t);
   const deviceAttributes = useDeviceAttributes(t);
@@ -78,7 +78,7 @@ const DevicePage = () => {
                 onChange={(event) => setItem({ ...item, name: event.target.value })}
                 label={t('sharedName')}
               />
-              { !PartialDisableEditDevice && (
+              { !PartialDisableEditDevice && ( // foxgps
               <TextField
                 value={item.uniqueId || ''}
                 onChange={(event) => setItem({ ...item, uniqueId: event.target.value })}
@@ -96,7 +96,7 @@ const DevicePage = () => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails className={classes.details}>
-              { !PartialDisableEditDevice && (
+              { !PartialDisableEditDevice && ( // foxgps
               <SelectField
                 value={item.groupId}
                 onChange={(event) => setItem({ ...item, groupId: Number(event.target.value) })}
@@ -104,7 +104,7 @@ const DevicePage = () => {
                 label={t('groupParent')}
               />
               )}
-              { !PartialDisableEditDevice && (
+              { !PartialDisableEditDevice && ( // foxgps
               <TextField
                 value={item.phone || ''}
                 onChange={(event) => setItem({ ...item, phone: event.target.value })}
@@ -116,7 +116,7 @@ const DevicePage = () => {
                 onChange={(event) => setItem({ ...item, model: event.target.value })}
                 label={t('deviceModel')}
               />
-              { !PartialDisableEditDevice && (
+              { !PartialDisableEditDevice && ( // foxgps
               <TextField
                 value={item.contact || ''}
                 onChange={(event) => setItem({ ...item, contact: event.target.value })}

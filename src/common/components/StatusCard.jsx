@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react'; // foxgps
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Draggable from 'react-draggable';
@@ -20,7 +20,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import CloseIcon from '@mui/icons-material/Close';
 import ReplayIcon from '@mui/icons-material/Replay';
 import PublishIcon from '@mui/icons-material/Publish';
-import LinkIcon from '@mui/icons-material/Link';
+import LinkIcon from '@mui/icons-material/Link'; // foxgps
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PendingIcon from '@mui/icons-material/Pending';
@@ -118,10 +118,10 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const t = useTranslation();
-  const cardRef = useRef(null);
+  const cardRef = useRef(null); // foxgps
 
   const deviceReadonly = useDeviceReadonly();
-  const PartialDisableEditDevice = useAttributePreference('ui.PartialDisableEditDevice') || false; // gui config permissão de usuário par exibir
+  const PartialDisableEditDevice = useAttributePreference('ui.PartialDisableEditDevice') || false; // foxgps
 
   const shareDisabled = useSelector((state) => state.session.server.attributes.disableShare);
   const user = useSelector((state) => state.session.user);
@@ -130,7 +130,7 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
   const deviceImage = device?.attributes?.deviceImage;
 
   const positionAttributes = usePositionAttributes(t);
-  const positionItems = useAttributePreference('positionItems', 'fixTime,address,speed,totalDistance,ignition,power,course,geofenceIds');
+  const positionItems = useAttributePreference('positionItems', 'fixTime,address,speed,totalDistance,ignition,power,course,geofenceIds'); // foxgps
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -180,11 +180,10 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
         {device && (
           <Draggable
             handle={`.${classes.media}, .${classes.header}`}
-            nodeRef={cardRef} // Use nodeRef prop to pass the ref
+            nodeRef={cardRef} // foxgps
           >
+            {/* foxgps */}
             <Card elevation={3} className={classes.card} ref={cardRef}>
-              {' '}
-              {/* Apply the ref here */}
               {deviceImage ? (
                 <CardMedia
                   className={classes.media}
@@ -253,12 +252,14 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
                 >
                   <PublishIcon />
                 </IconButton>
+                {/* foxgps ... */}
                 <IconButton
                   onClick={() => navigate(`/settings/device/${deviceId}/connections`)}
                   disabled={disableActions}
                 >
                   <LinkIcon />
                 </IconButton>
+                {/* ... foxgps */}
                 <IconButton
                   onClick={() => navigate(`/settings/device/${deviceId}`)}
                   disabled={disableActions || deviceReadonly}
@@ -267,7 +268,7 @@ const StatusCard = ({ deviceId, position, onClose, disableActions, desktopPaddin
                 </IconButton>
                 <IconButton
                   onClick={() => setRemoving(true)}
-                  disabled={disableActions || deviceReadonly || PartialDisableEditDevice}
+                  disabled={disableActions || deviceReadonly || PartialDisableEditDevice} // foxgps
                   className={classes.delete}
                 >
                   <DeleteIcon />

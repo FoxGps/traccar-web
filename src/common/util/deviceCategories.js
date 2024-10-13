@@ -21,7 +21,7 @@ export default [
   'truck',
   'van',
   'scooter',
-  'bmw',
+  'bmw', // foxgps ...
   'bmwlogo1',
   'bmwlogo2',
   'harvest',
@@ -30,5 +30,5 @@ export default [
   'jetski',
   'loadertruck',
   'motorbike',
-  'motorcycle2',
+  'motorcycle2', // ... foxgps
 ];

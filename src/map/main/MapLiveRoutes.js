@@ -38,7 +38,7 @@ const MapLiveRoutes = () => {
         },
         paint: {
           'line-color': ['get', 'color'],
-          'line-width': 3,
+          'line-width': 3, // foxgps
         },
       });
 

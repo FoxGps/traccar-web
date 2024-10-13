@@ -109,7 +109,7 @@ export default (t) => useMemo(() => ({
     name: t('attributeUiDisableDrivers'),
     type: 'boolean',
   },
-  'ui.PartialDisableEditDevice': {
+  'ui.PartialDisableEditDevice': { // foxgps
     name: t('attributePartialDisableEditDevice'),
     type: 'boolean',
   },

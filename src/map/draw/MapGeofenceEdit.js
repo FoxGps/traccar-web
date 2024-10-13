@@ -32,7 +32,7 @@ const draw = new MapboxDraw({
     filter: ['all'],
     layout: {
       'text-field': '{user_name}',
-      'text-font': ['Roboto Regular'],
+      'text-font': ['Roboto Regular'], // foxgps
       'text-size': 12,
     },
     paint: {

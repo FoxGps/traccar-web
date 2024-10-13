@@ -37,6 +37,7 @@ const MapPositions = ({ positions, onClick, showStatus, selectedPosition, titleF
         showDirection = selectedPositionId === position.id && position.course > 0;
         break;
     }
+    // foxgps ...
     let color;
     if (showStatus) {
       if (position.attributes.color) {
@@ -48,15 +49,14 @@ const MapPositions = ({ positions, onClick, showStatus, selectedPosition, titleF
       }
     } else {
       color = 'neutral';
-    }
-
+    } // ... foxgps
     return {
       id: position.id,
       deviceId: position.deviceId,
       name: device.name,
       fixTime: formatTime(position.fixTime, 'seconds'),
       category: mapIconKey(device.category),
-      color,
+      color, // foxgps
       rotation: position.course,
       direction: showDirection,
     };

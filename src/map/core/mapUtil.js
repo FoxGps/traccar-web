@@ -36,7 +36,7 @@ export const prepareIcon = (background, icon, color) => {
   canvas.style.height = `${background.height}px`;
 
   const context = canvas.getContext('2d');
-
+  // foxgps ...
   if (color && color === '#388e3c') {
     context.save();
     context.shadowBlur = 7;
@@ -47,19 +47,19 @@ export const prepareIcon = (background, icon, color) => {
     context.restore();
   } else {
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
-  }
+  } // ... foxgps
 
   if (icon) {
     const iconRatio = 0.5;
     const imageWidth = canvas.width * iconRatio;
     const imageHeight = canvas.height * iconRatio;
-    const tintedIcon = canvasTintImage(icon, color);
-    context.drawImage(tintedIcon, (canvas.width - imageWidth) / 2, (canvas.height - imageHeight) / 2, imageWidth, imageHeight);
+    const tintedIcon = canvasTintImage(icon, color); // foxgps
+    context.drawImage(tintedIcon, (canvas.width - imageWidth) / 2, (canvas.height - imageHeight) / 2, imageWidth, imageHeight); // foxgps
   }
 
-  const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+  const imageData = context.getImageData(0, 0, canvas.width, canvas.height); // foxgps
 
-  return imageData;
+  return imageData; // foxgps
 };
 
 export const reverseCoordinates = (it) => {

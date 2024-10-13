@@ -13,7 +13,7 @@ import CollectionFab from './components/CollectionFab';
 import CollectionActions from './components/CollectionActions';
 import TableShimmer from '../common/components/TableShimmer';
 import SearchHeader, { filterByKeyword } from './components/SearchHeader';
-import { useAttributePreference } from '../common/util/preferences'; // gui
+import { useAttributePreference } from '../common/util/preferences'; // foxgps
 import { formatTime } from '../common/util/formatter';
 import { useAdministrator, useDeviceReadonly } from '../common/util/permissions';
 import useSettingsStyles from './common/useSettingsStyles';
@@ -28,7 +28,7 @@ const DevicesPage = () => {
 
   const admin = useAdministrator();
   const deviceReadonly = useDeviceReadonly();
-  const disableDelete = useAttributePreference('ui.PartialDisableEditDevice') || false; // gui config permissão de usuário par exibir
+  const disableDelete = useAttributePreference('ui.PartialDisableEditDevice') || false; // foxgps
 
   const [timestamp, setTimestamp] = useState(Date.now());
   const [items, setItems] = useState([]);
@@ -98,7 +98,7 @@ const DevicesPage = () => {
                   setTimestamp={setTimestamp}
                   customActions={[actionConnections]}
                   readonly={deviceReadonly}
-                  disable={disableDelete} // gui
+                  disable={disableDelete} // foxgps
                 />
               </TableCell>
             </TableRow>

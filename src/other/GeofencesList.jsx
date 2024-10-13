@@ -8,8 +8,8 @@ import {
 import { geofencesActions } from '../store';
 import CollectionActions from '../settings/components/CollectionActions';
 import { useCatchCallback } from '../reactHelper';
-import { useDeviceReadonly } from '../common/util/permissions';
-import { useAttributePreference } from '../common/util/preferences';
+import { useDeviceReadonly } from '../common/util/permissions'; // foxgps
+import { useAttributePreference } from '../common/util/preferences'; // foxgps
 
 const useStyles = makeStyles(() => ({
   list: {
@@ -28,11 +28,10 @@ const GeofencesList = ({ onGeofenceSelected }) => {
   const dispatch = useDispatch();
 
   const items = useSelector((state) => state.geofences.items);
-
+  // foxgps ...
   const deviceReadonly = useDeviceReadonly();
   const partialDisableAttribute = useAttributePreference('ui.PartialDisableEditDevice') || false; // gui config permissão de usuário par exibir
-
-  const disableDelete = deviceReadonly || partialDisableAttribute;
+  const disableDelete = deviceReadonly || partialDisableAttribute; // ... foxgps
 
   const refreshGeofences = useCatchCallback(async () => {
     const response = await fetch('/api/geofences');
@@ -49,6 +48,7 @@ const GeofencesList = ({ onGeofenceSelected }) => {
         <Fragment key={item.id}>
           <ListItemButton key={item.id} onClick={() => onGeofenceSelected(item.id)}>
             <ListItemText primary={item.name} />
+            {/* foxgps */}
             <CollectionActions itemId={item.id} editPath="/settings/geofence" endpoint="geofences" setTimestamp={refreshGeofences} disable={disableDelete} />
           </ListItemButton>
           {index < list.length - 1 ? <Divider /> : null}
